@@ -1,0 +1,20 @@
+import random
+import string
+
+def sifre_olustur(hane_sayisi, sifre_adedi):
+    karakterler = string.ascii_letters + string.digits + string.punctuation
+
+    sifreler = []
+    for _ in range(sifre_adedi):
+        sifre = ''.join(random.choice(karakterler) for _ in range(hane_sayisi))
+        sifreler.append(sifre)
+    return sifreler
+
+if __name__ == "__main__":
+    hane_sayisi = int(input("Şifreleriniz kaç karakterli olsun? "))
+    sifre_adedi = int(input("Kaç tane şifre oluşturulsun? "))
+    
+    sifreler = sifre_olustur(hane_sayisi, sifre_adedi)
+    print("Oluşturulan şifreler:")
+    for sifre in sifreler:
+        print(sifre)
