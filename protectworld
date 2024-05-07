@@ -1,0 +1,50 @@
+import discord
+import random
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
+
+client = discord.Client()
+
+isik_kirliliği_yardım = [
+    "Gece lambalarını kullanırken düşük watt'lı ampuller tercih edin.",
+    "Aydınlatma armatürlerini kapatarak veya kısıp, sadece ihtiyaç olduğunda kullanın.",
+    "Aydınlatma armatürlerini yere doğru yönlendirerek gökyüzüne yayılan ışığı azaltın.",
+    "Yıldızları görmek için şehir ışıklarından uzaklaşın, kırsal bölgelere gitmeyi düşünün.",
+    "LED ışıklar kullanarak enerji tasarrufu sağlayın ve kirliliği azaltın."
+]
+
+gurultu_kirliliği_yardım = [
+    "Ses yalıtımlı malzemeler kullanarak evinizde gürültüyü azaltın.",
+    "Gece geç saatlerde veya erken saatlerde yüksek sesle müzik çalmaktan kaçının.",
+    "Dışarıda gürültü yapan cihazları (örneğin, motorlu çim biçme makineleri) kullanırken, komşularınızın uyuduğundan veya rahatsız olabileceğinden emin olun.",
+    "Sessiz bir ortamda rahatlatıcı müzik dinlemek veya doğanın seslerini dinlemek gürültü kirliliğini azaltabilir.",
+    "Gürültü yapan araçlarınızın bakımını düzenli olarak yaparak gürültüyü azaltın."
+]
+
+def pollution_reduction_tip(category):
+    if category.lower() == "ışık":
+        return random.choice(isik_kirliliği_yardım)
+    elif category.lower() == "gürültü":
+        return random.choice(gurultu_kirliliği_yardım)
+    else:
+        return "Lütfen 'ışık' veya 'gürültü' kategorilerinden birini seçin."
+
+@client.event
+async def on_ready():
+    print(f'{client.user} olarak giriş yapıldı')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('!fikir'):
+        args = message.content.split()[1:]
+        if len(args) > 0:
+            category = args[0]
+            tip = pollution_reduction_tip(category)
+            await message.channel.send(tip)
+        else:
+            await message.channel.send("Kullanım: !fikir [ışık veya gürültü]")
+
+client.run("Devlet sırrı :D")
