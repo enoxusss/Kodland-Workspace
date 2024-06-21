@@ -1,0 +1,29 @@
+@keyframes color-change {
+    0% {
+      color: blue;
+    }
+  
+    20% {
+      color: red;
+    }
+  
+    40% {
+      color: purple;
+    }
+
+    60% {
+        color: pink;
+    }
+
+    80% {
+        color: green;
+    }
+
+    100% {
+        color: blue;
+    }
+}
+
+h1 {
+    animation: color-change 3s infinite;
+}
